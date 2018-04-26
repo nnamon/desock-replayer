@@ -183,6 +183,8 @@ void preeny_socket_sync_loop(int socket)
 
     // Cleanup
     free(pkts);
+    // Exit ungracefully for performance reasons
+    exit(0);
 }
 
 __attribute__((destructor)) void preeny_desock_shutdown()
