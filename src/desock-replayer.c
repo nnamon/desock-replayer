@@ -156,6 +156,7 @@ void preeny_socket_sync_loop(int socket)
             preeny_error("Unable to open packet data file '%s'.\n", meta_filename);
             return;
         }
+
         void* payload = mmap(NULL, file_size, PROT_READ, MAP_PRIVATE | MAP_POPULATE, metafd, 0);
         if (payload == MAP_FAILED) {
             preeny_error("Unable to mmap packet data file '%s'.\n", meta_filename);
@@ -183,8 +184,6 @@ void preeny_socket_sync_loop(int socket)
 
     // Cleanup
     free(pkts);
-    // Exit ungracefully for performance reasons
-    exit(0);
 }
 
 __attribute__((destructor)) void preeny_desock_shutdown()
