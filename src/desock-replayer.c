@@ -180,6 +180,10 @@ void preeny_socket_sync_loop(int socket)
         // Cleanup
         munmap(payload, file_size);
         close(metafd);
+
+        if (replay_exit_on_injection && pkt_index == replay_fuzz_index) {
+            exit(0);
+        }
     }
 
     // Cleanup
